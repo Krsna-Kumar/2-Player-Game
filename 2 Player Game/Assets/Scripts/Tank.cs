@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class Tank : MonoBehaviour
 {
-    public float rotateSpeed;
+    public float rotationSpeed = 50f;
+    void Update(){
+        
+        transform.Rotate(0.0f,0.0f,rotationSpeed * Time.deltaTime);
 
-    private void Start(){
+        if(Input.GetButtonDown("Jump")){
+            rotationSpeed *= -1;
+        }
 
+        if(Input.GetKeyDown(KeyCode.G)){
+            ShowCurrentRotation();
+        }
     }
 
-    private void Update(){
-        transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime); //this code rotates the tank
+    private void ShowCurrentRotation(){
+        Vector3 rotation = Quaternion.ToEulerAngles(transform.rotation);
+        Debug.Log(rotation);
     }
 }
