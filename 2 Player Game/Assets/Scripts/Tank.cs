@@ -5,6 +5,7 @@ using System.Xml;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Tank : MonoBehaviour
@@ -13,6 +14,9 @@ public class Tank : MonoBehaviour
     private float swapper;
     private float tempSpeed = 0; //swapping values with this variable
 
+    public GameObject bulletPrefab;
+
+    public Transform launcherPoint;
     public float forwardForce = 100.0f;
     private Rigidbody2D tankRb;
 
@@ -22,13 +26,23 @@ public class Tank : MonoBehaviour
     }
 
     void Update(){
+
         if(Input.GetButtonDown("Jump")){
             swapper = rotationSpeed;
+            
+            GameObject bullet = Instantiate(bulletPrefab, launcherPoint.position, launcherPoint.rotation);
+            Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
+            
+            bulletRigidbody.velocity = launcherPoint.up * forwardForce * 5;
+            Destroy(bullet, 2f);
         }
         else if(Input.GetButton("Jump")){
             Vector3 direction = Quaternion.Euler(0.0f,0.0f,transform.rotation.z) * Vector2.up;
+            
             rotationSpeed = tempSpeed;
             transform.Translate(direction * forwardForce * Time.deltaTime);
+
+            
         }
         else if(Input.GetButtonUp("Jump")){
             rotationSpeed = swapper *-1;
