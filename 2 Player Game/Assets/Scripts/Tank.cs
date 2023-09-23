@@ -21,16 +21,16 @@ public class Tank : MonoBehaviour
     private Rigidbody2D tankRb;
 
     private void Update(){
-        if(Input.GetButtonDown("Jump")){
+        if(Input.GetKeyDown(KeyCode.K)){
             FiringBullet();
             SwapSpeedValue();
         }
 
-        else if(Input.GetButton("Jump")){
+        else if(Input.GetKey(KeyCode.K)){
             GoForward();
         }
 
-        else if(Input.GetButtonUp("Jump")){
+        else if(Input.GetKeyUp(KeyCode.K)){
             ReverseRotation();
         }
 
