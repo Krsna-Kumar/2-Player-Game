@@ -20,33 +20,48 @@ public class Tank : MonoBehaviour
     public float forwardForce = 100.0f;
     private Rigidbody2D tankRb;
 
+    private void Update(){
+        if(Input.GetButtonDown("Jump")){
+            FiringBullet();
+            SwapSpeedValue();
+        }
 
-    void Start(){
-        tankRb = GetComponent<Rigidbody2D>();
+        else if(Input.GetButton("Jump")){
+            GoForward();
+        }
+
+        else if(Input.GetButtonUp("Jump")){
+            ReverseRotation();
+        }
+
+        //Rotate Object Constantly
+        RotateObject();
     }
 
-    void Update(){
-
-        if(Input.GetButtonDown("Jump")){
-            swapper = rotationSpeed;
-            
-            GameObject bullet = Instantiate(bulletPrefab, launcherPoint.position, launcherPoint.rotation);
+    private void FiringBullet(){
+        GameObject bullet = Instantiate(bulletPrefab, launcherPoint.position, launcherPoint.rotation);
             Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
             
             bulletRigidbody.velocity = launcherPoint.up * forwardForce * 5;
             Destroy(bullet, 2f);
-        }
-        else if(Input.GetButton("Jump")){
-            Vector3 direction = Quaternion.Euler(0.0f,0.0f,transform.rotation.z) * Vector2.up;
+    }
+
+    private void SwapSpeedValue(){
+        swapper = rotationSpeed;
+    }
+
+    private void RotateObject(){
+        transform.Rotate(0.0f,0.0f,rotationSpeed * Time.deltaTime);
+    }
+
+    private void ReverseRotation(){
+            rotationSpeed = swapper *-1;
+    }
+
+    private void GoForward(){
+        Vector3 direction = Quaternion.Euler(0.0f,0.0f,transform.rotation.z) * Vector2.up;
             
             rotationSpeed = tempSpeed;
             transform.Translate(direction * forwardForce * Time.deltaTime);
-
-            
-        }
-        else if(Input.GetButtonUp("Jump")){
-            rotationSpeed = swapper *-1;
-        }   
-        transform.Rotate(0.0f,0.0f,rotationSpeed * Time.deltaTime);
     }
 }
