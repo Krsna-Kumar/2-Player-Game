@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6706417004494973109}
-  - component: {fileID: 8521854391957719771}
   - component: {fileID: 7361391724332678389}
   - component: {fileID: 3916569099919351322}
+  - component: {fileID: 8521854391957719771}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -36,22 +36,6 @@ Transform:
   - {fileID: 6000869051775164590}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8521854391957719771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4188659865965309542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddd928c05f1e42d4d8b5a94455ebbc7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 200
-  bulletPrefab: {fileID: 5893098217592598979, guid: 51c758a0e1f6bb040b76bde7c4d26a4f, type: 3}
-  launcherPoint: {fileID: 6550053547310903205}
-  forwardForce: 2
 --- !u!61 &7361391724332678389
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -124,6 +108,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8521854391957719771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4188659865965309542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd928c05f1e42d4d8b5a94455ebbc7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 200
+  bulletPrefab: {fileID: 5893098217592598979, guid: 51c758a0e1f6bb040b76bde7c4d26a4f, type: 3}
+  launcherPoint: {fileID: 6550053547310903205}
+  forwardForce: 2
 --- !u!1 &5397974133954714051
 GameObject:
   m_ObjectHideFlags: 0

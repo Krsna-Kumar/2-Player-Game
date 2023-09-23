@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Tank : MonoBehaviour
 {
+    public KeyCode tapButton;
+
     public float rotationSpeed; //Set to 150f in inspector
     private float swapper;
     private float tempSpeed = 0; //swapping values with this variable
@@ -15,24 +17,24 @@ public class Tank : MonoBehaviour
     
 
     private void Update(){
-        if(Input.GetMouseButtonDown(0)){
-            FiringBullet();
-            SwapSpeedValue();
-        }
+         if(Input.GetKeyDown(tapButton)){
+             FiringBullet();
+             SwapSpeedValue();
+         }
 
-        else if(Input.GetMouseButton(0)){
-            GoForward();
-        }
+         else if(Input.GetKey(tapButton)){
+             GoForward();
+         }
 
-        else if(Input.GetMouseButtonUp(0)){
-            ReverseRotation();
-        }
+         else if(Input.GetKeyUp(tapButton)){
+             ReverseRotation();
+         }
 
         //Rotate Object Constantly
         RotateObject();
     }
 
-    private void FiringBullet(){
+    public void FiringBullet(){
         GameObject bullet = Instantiate(bulletPrefab, launcherPoint.position, launcherPoint.rotation);
             Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
             
@@ -40,19 +42,19 @@ public class Tank : MonoBehaviour
             Destroy(bullet, 2f);
     }
 
-    private void SwapSpeedValue(){
+    public void SwapSpeedValue(){
         swapper = rotationSpeed;
     }
 
-    private void RotateObject(){
+    public void RotateObject(){
         transform.Rotate(0.0f,0.0f,rotationSpeed * Time.deltaTime);
     }
 
-    private void ReverseRotation(){
+    public void ReverseRotation(){
             rotationSpeed = swapper *-1;
     }
 
-    private void GoForward(){
+    public void GoForward(){
         Vector3 direction = Quaternion.Euler(0.0f,0.0f,transform.rotation.z) * Vector2.up;
             
             rotationSpeed = tempSpeed;
