@@ -19,18 +19,20 @@ public class Tank : MonoBehaviour
     public Transform launcherPoint;
     public float forwardForce = 100.0f;
     private Rigidbody2D tankRb;
+    
+    
 
     private void Update(){
-        if(Input.GetKeyDown(KeyCode.K)){
+        if(Input.GetMouseButtonDown(0)){
             FiringBullet();
             SwapSpeedValue();
         }
 
-        else if(Input.GetKey(KeyCode.K)){
+        else if(Input.GetMouseButton(0)){
             GoForward();
         }
 
-        else if(Input.GetKeyUp(KeyCode.K)){
+        else if(Input.GetMouseButtonUp(0)){
             ReverseRotation();
         }
 
