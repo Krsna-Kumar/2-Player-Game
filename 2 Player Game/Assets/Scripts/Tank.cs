@@ -1,25 +1,38 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
+using Unity.Mathematics;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class Tank : MonoBehaviour
 {
-    public float rotationSpeed = 50f;
-    void Update(){
-        
-        transform.Rotate(0.0f,0.0f,rotationSpeed * Time.deltaTime);
+    public float rotationSpeed; //Set to 150f in inspector
+    private float swapper;
+    private float tempSpeed = 0; //swapping values with this variable
 
-        if(Input.GetButtonDown("Jump")){
-            rotationSpeed *= -1;
-        }
+    public float forwardForce = 100.0f;
+    private Rigidbody2D tankRb;
 
-        if(Input.GetKeyDown(KeyCode.G)){
-            ShowCurrentRotation();
-        }
+
+    void Start(){
+        tankRb = GetComponent<Rigidbody2D>();
     }
 
-    private void ShowCurrentRotation(){
-        Vector3 rotation = Quaternion.ToEulerAngles(transform.rotation);
-        Debug.Log(rotation);
+    void Update(){
+        if(Input.GetButtonDown("Jump")){
+            swapper = rotationSpeed;
+        }
+        else if(Input.GetButton("Jump")){
+            Vector3 direction = Quaternion.Euler(0.0f,0.0f,transform.rotation.z) * Vector2.up;
+            rotationSpeed = tempSpeed;
+            transform.Translate(direction * forwardForce * Time.deltaTime);
+        }
+        else if(Input.GetButtonUp("Jump")){
+            rotationSpeed = swapper *-1;
+        }   
+        transform.Rotate(0.0f,0.0f,rotationSpeed * Time.deltaTime);
     }
 }
