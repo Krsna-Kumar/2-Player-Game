@@ -1,11 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Xml;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Tank : MonoBehaviour
@@ -18,8 +12,6 @@ public class Tank : MonoBehaviour
 
     public Transform launcherPoint;
     public float forwardForce = 100.0f;
-    private Rigidbody2D tankRb;
-    
     
 
     private void Update(){
