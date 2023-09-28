@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class Tank : MonoBehaviour
 {
+    public string buttomTagName;
+    public ButtonEvent ownButton;
     public KeyCode tapButton;
 
     public float rotationSpeed; //Set to 150f in inspector
@@ -15,20 +19,35 @@ public class Tank : MonoBehaviour
     public Transform launcherPoint;
     public float forwardForce = 100.0f;
     
-
+    private void Start(){
+        ownButton = GameObject.FindWithTag(buttomTagName).GetComponent<ButtonEvent>();
+    }
     private void Update(){
-         if(Input.GetKeyDown(tapButton)){
-             FiringBullet();
-             SwapSpeedValue();
-         }
+        // if(Input.GetKeyDown(tapButton)){
+        //     FiringBullet();
+        //     SwapSpeedValue();
+        // }
 
-         else if(Input.GetKey(tapButton)){
-             GoForward();
-         }
+        // else if(Input.GetKey(tapButton)){
+        //     GoForward();
+        // }
 
-         else if(Input.GetKeyUp(tapButton)){
-             ReverseRotation();
-         }
+        // else if(Input.GetKeyUp(tapButton)){
+        //     ReverseRotation();
+        // }
+
+        if(ownButton.pointerDown){
+            FiringBullet();
+            SwapSpeedValue();
+        }
+
+        if(ownButton.pointerHold){
+            GoForward();
+        }
+
+        if(ownButton.pointerRelease){
+            ReverseRotation();
+        }
 
         //Rotate Object Constantly
         RotateObject();
